@@ -21,3 +21,23 @@ app.get("/users", async (req, res, next) => {
     next(ex);
   }
 });
+
+app.post("/api/auth", async (req, res, next) => {
+  try {
+    res.send(await prisma.user.authenticate(req.body));
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+app.get("/api/auth", async (req, res, next) => {
+  try {
+    console.log(
+      req.headers.authorization,
+      "logging for find by token parameter"
+    );
+    res.send(await prisma.user.findByToken(req.headers.authorization));
+  } catch (ex) {
+    next(ex);
+  }
+});
