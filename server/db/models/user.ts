@@ -19,6 +19,11 @@ interface SignUpInfo {
   zip: string;
 }
 
+interface JWTPayloadI {
+  id: string;
+  iat: number;
+}
+
 export const userPrismaExt = {
   model: {
     user: {
@@ -37,12 +42,12 @@ export const userPrismaExt = {
         });
       },
 
-      async findByToken(token: string) {
+      async findByToken(token: any) {
         try {
-          const jwtPayload = jwt.verify(token, JWT) as string;
+          const jwtPayload = jwt.verify(token, JWT) as JWTPayloadI;
           const user = prisma.user.findUnique({
             where: {
-              id: jwtPayload,
+              id: jwtPayload.id,
             },
           });
           if (user) {
