@@ -32,10 +32,6 @@ app.post("/api/auth", async (req, res, next) => {
 
 app.get("/api/auth", async (req, res, next) => {
   try {
-    console.log(
-      req.headers.authorization,
-      "logging for find by token parameter"
-    );
     res.send(await prisma.user.findByToken(req.headers.authorization));
   } catch (ex) {
     next(ex);
