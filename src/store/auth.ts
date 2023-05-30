@@ -1,19 +1,10 @@
 import axios from "axios";
 import { Dispatch } from "redux";
+import { UserI } from "./user";
 
-export type AuthI = {
-  id: string;
-  username: string;
-  password: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  state: string;
-  zip: string;
-};
-interface ActionI {
+interface ActionAuthI {
   type: string;
-  auth: {} | AuthI;
+  auth: boolean;
 }
 
 type tokenI = {
@@ -28,7 +19,7 @@ type credentialsI = {
 
 export const logout = () => {
   window.localStorage.removeItem("token");
-  return { type: "REMOVE_AUTH", auth: {} };
+  return { type: "REMOVE_AUTH", auth: false };
 };
 
 export const loginWithToken = () => {
@@ -41,7 +32,8 @@ export const loginWithToken = () => {
           authorization: token,
         },
       });
-      dispatch({ type: "SET_AUTH", auth: response.data as AuthI });
+      dispatch({ type: "SET_AUTH", auth: true });
+      dispatch({ type: "SET_USER", user: response.data as UserI });
     }
   };
 };
@@ -54,7 +46,7 @@ export const attemptLogin = (credentials: credentialsI) => {
   };
 };
 
-const auth = (state = {}, action: ActionI) => {
+const auth = (state = false, action: ActionAuthI) => {
   if (action.type === "SET_AUTH") {
     return action.auth;
   }
