@@ -32,8 +32,11 @@ export const loginWithToken = () => {
           authorization: token,
         },
       });
-      dispatch({ type: "SET_AUTH", auth: true });
-      dispatch({ type: "SET_USER", user: response.data as UserI });
+      if (response.data.id) {
+        dispatch({ type: "SET_AUTH", auth: true });
+      } else {
+        throw Error("Bad Credentials");
+      }
     }
   };
 };

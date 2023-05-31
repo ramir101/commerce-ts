@@ -5,7 +5,10 @@ const app = express.Router();
 
 app.get("/", async (req, res, next) => {
   try {
-    const response = await prisma.user.findMany();
+    const response = await prisma.user.findByToken(
+      req.headers.authorization as string
+    );
+
     res.send(response);
   } catch (ex) {
     next(ex);

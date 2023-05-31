@@ -41,7 +41,7 @@ export const userPrismaExt = {
         });
       },
 
-      async findByToken(token: any) {
+      async findByToken(token: string) {
         try {
           const jwtPayload = jwt.verify(token, JWT) as JWTPayloadI;
           const user = prisma.user.findUnique({
