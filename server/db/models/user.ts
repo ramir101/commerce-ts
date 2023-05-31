@@ -8,7 +8,6 @@ interface UserPassword {
   username: string;
   password: string;
 }
-
 interface SignUpInfo {
   username: string;
   password: string;
