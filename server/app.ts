@@ -1,5 +1,4 @@
 import express from "express";
-import { prisma } from "./db";
 export const app = express();
 
 app.use(express.json());
@@ -13,27 +12,6 @@ app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "../../static/index.html"))
 );
 
-app.get("/users", async (req, res, next) => {
-  try {
-    const response = await prisma.user.findMany();
-    res.send(response);
-  } catch (ex) {
-    next(ex);
-  }
-});
-
-app.post("/api/auth", async (req, res, next) => {
-  try {
-    res.send(await prisma.user.authenticate(req.body));
-  } catch (ex) {
-    next(ex);
-  }
-});
-
-app.get("/api/auth", async (req, res, next) => {
-  try {
-    res.send(await prisma.user.findByToken(req.headers.authorization));
-  } catch (ex) {
-    next(ex);
-  }
-});
+app.use("/api/auth", require("./api/auth"));
+app.use("/api/product", require("./api/product"));
+app.use("/api/user", require("./api/user"));
