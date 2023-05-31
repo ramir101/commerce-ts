@@ -19,6 +19,28 @@ model User {
   zip       String @db.Char(5)
 }
 
+model Product {
+  id        String @id @default(uuid())
+  name String
+  price Decimal @db.Decimal(10, 2)
+  description String
+  stock Int
+  imageUrl String
+  petType PetType @default(cat)
+  category PetCategory @default(food)
+}
+
+enum PetType {
+  cat
+  dog
+}
+
+enum PetCategory {
+  food
+  accessory
+  toy
+}
+
 enum State {
   AK
   AL
