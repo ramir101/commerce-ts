@@ -17,6 +17,18 @@ interface ActionUserI {
   user: UserI;
 }
 
+export const fetchUser = () => {
+  return async (dispatch: Dispatch) => {
+    const token = window.localStorage.getItem("token");
+    const response = await axios.get("/api/user", {
+      headers: {
+        authorization: token,
+      },
+    });
+    dispatch({ type: "SET_USER", user: response.data });
+  };
+};
+
 const user = (
   state: UserI = {
     id: "",
