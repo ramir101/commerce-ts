@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { attemptLogin } from "../store";
 import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -19,6 +21,7 @@ function Login() {
   const login = (ev: React.FormEvent) => {
     ev.preventDefault();
     dispatch<any>(attemptLogin(credentials));
+    navigate("/products");
   };
 
   return (

@@ -13,5 +13,5 @@ app.get("/", (req, res) =>
 );
 
 app.use("/api/auth", require("./api/auth"));
-app.use("/api/product", require("./api/product"));
+app.use("/api/products", require("./api/products"));
 app.use("/api/user", require("./api/user"));

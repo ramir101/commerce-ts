@@ -15,11 +15,13 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useDispatch } from "react-redux";
 import { RootState, UserI, logout } from "../store";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const pages = ["Products", "Pricing", "Blog"];
 
 function Nav() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const user = useSelector<RootState, UserI>((state) => state.user);
 
@@ -56,7 +58,7 @@ function Nav() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/#/products"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -96,11 +98,13 @@ function Nav() {
               sx={{
                 display: { xs: "block", md: "none" },
               }}>
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography
+                  textAlign="center"
+                  onClick={() => navigate("/products")}>
+                  Products
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -122,14 +126,11 @@ function Nav() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}>
-                {page}
-              </Button>
-            ))}
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}>
+              Products
+            </Button>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

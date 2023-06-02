@@ -12,23 +12,23 @@ export type ProductI = {
   category: "food" | "toy" | "accessory";
 };
 
-type ActionProducti = {
-  type: "SET_PRODUCT";
-  product: ProductI;
+export type ActionProducti = {
+  type: "SET_PRODUCTS";
+  product: ProductI[];
 };
 
 export const fetchProducts = () => {
   return async (dispatch: Dispatch<ActionProducti>) => {
-    const response = await axios.get("/api/product");
-    dispatch({ type: "SET_PRODUCT", product: response.data });
+    const response = await axios.get("/api/products");
+    dispatch({ type: "SET_PRODUCTS", product: response.data });
   };
 };
 
-const product = (state: ProductI[] = [], action: ActionProducti) => {
-  if (action.type === "SET_PRODUCT") {
+const products = (state: ProductI[] = [], action: ActionProducti) => {
+  if (action.type === "SET_PRODUCTS") {
     return action.product;
   }
   return state;
 };
 
-export default product;
+export default products;
