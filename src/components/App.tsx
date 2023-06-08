@@ -44,15 +44,12 @@ function App() {
   }
 
   return (
-    <div>
-      <nav>
-        <Nav />
-      </nav>
-      <div style={{ height: "60px" }}></div>
+    <Container maxWidth={false} disableGutters>
+      <Nav />
       <Routes>
         <Route path="/products" element={<Products />} />
       </Routes>
-    </div>
+    </Container>
   );
 }
 

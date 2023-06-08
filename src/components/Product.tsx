@@ -13,13 +13,19 @@ interface Props {
   product: ProductI;
 }
 
-//Consider using Card for the products. Will require some customization
 function Product(props: Props) {
   return (
-    <Grid item xs={6} md={4} lg={3} sx={{ display: "flex" }}>
+    <Grid
+      item
+      xs={12}
+      sm={6}
+      md={4}
+      lg={3}
+      sx={{ display: "flex", justifyContent: "center" }}>
       <Card
         sx={{
           maxWidth: 345,
+          minWidth: 345,
           display: "flex",
           justifyContent: "space-between",
           flexDirection: "column",
@@ -30,12 +36,12 @@ function Product(props: Props) {
           title={props.product.name}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" align="center">
+          <Typography variant="h5" component="div" align="center">
             {props.product.name}
           </Typography>
-          <Typography variant="body2" color="text.secondary" align="center">
+          {/* <Typography variant="body2" color="text.secondary" align="center">
             {props.product.description}
-          </Typography>
+          </Typography> */}
         </CardContent>
         <CardActions sx={{ display: "flex", justifyContent: "center" }}>
           <Button variant="contained" size="small">

@@ -12,10 +12,22 @@ function Products() {
   ) as ProductI[];
 
   return (
-    <Grid container spacing={2}>
-      {products.map((product) => (
-        <Product product={product} />
-      ))}
+    <Grid container>
+      <Grid
+        container
+        item
+        direction="row"
+        justifyContent="center"
+        alignItems="center">
+        <Grid item>
+          <h1>test</h1>
+        </Grid>
+      </Grid>
+      <Grid container item spacing={2}>
+        {products.map((product) => (
+          <Product key={product.id} product={product} />
+        ))}
+      </Grid>
     </Grid>
   );
 }

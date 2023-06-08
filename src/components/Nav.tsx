@@ -51,7 +51,7 @@ function Nav() {
 
   return (
     <AppBar position="static" sx={{ margin: 0 }}>
-      <Container maxWidth="xl">
+      <Container maxWidth={false}>
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
