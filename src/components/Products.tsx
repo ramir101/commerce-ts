@@ -3,13 +3,21 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ProductI, RootState } from "../store";
 import { Grid } from "@mui/material";
+import Product from "./Product";
 
 function Products() {
   const dispatch = useDispatch();
-  const product = useSelector<RootState>(
+  const products = useSelector<RootState>(
     (state) => state.products
   ) as ProductI[];
-  return <Grid></Grid>;
+
+  return (
+    <Grid container spacing={2}>
+      {products.map((product) => (
+        <Product product={product} />
+      ))}
+    </Grid>
+  );
 }
 
 export default Products;
