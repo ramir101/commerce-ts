@@ -21,7 +21,7 @@ function Login() {
   const login = (ev: React.FormEvent) => {
     ev.preventDefault();
     dispatch<any>(attemptLogin(credentials));
-    navigate("/products");
+    navigate("/products/all");
   };
 
   return (

@@ -40,14 +40,14 @@ function App() {
   }
 
   if (pathname === "/") {
-    navigate("/products");
+    navigate("/products/all");
   }
 
   return (
     <Container maxWidth={false} disableGutters>
       <Nav />
       <Routes>
-        <Route path="/products" element={<Products />} />
+        <Route path="/products/:category" element={<Products />} />
       </Routes>
     </Container>
   );

@@ -58,7 +58,7 @@ function Nav() {
             variant="h6"
             noWrap
             component="a"
-            href="/#/products"
+            href="/#/products/all"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -101,7 +101,7 @@ function Nav() {
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography
                   textAlign="center"
-                  onClick={() => navigate("/products")}>
+                  onClick={() => navigate("/products/all")}>
                   Products
                 </Typography>
               </MenuItem>
@@ -127,9 +127,19 @@ function Nav() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
-              onClick={handleCloseNavMenu}
+              onClick={() => navigate("/products/all")}
               sx={{ my: 2, color: "white", display: "block" }}>
-              Products
+              All-Products
+            </Button>
+            <Button
+              onClick={() => navigate("/products/cats")}
+              sx={{ my: 2, color: "white", display: "block" }}>
+              Cat-Products
+            </Button>
+            <Button
+              onClick={() => navigate("/products/dogs")}
+              sx={{ my: 2, color: "white", display: "block" }}>
+              Dog-Products
             </Button>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
