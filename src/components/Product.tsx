@@ -7,7 +7,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useParams } from "react-router-dom";
 
 interface Props {
   product: ProductI;
@@ -30,7 +29,7 @@ function Product(props: Props) {
           justifyContent: "space-between",
           flexDirection: "column",
         }}>
-        <a href={`/#/products/${props.product.id}`}>
+        <a href={`/#/products/${props.product.petType}s/${props.product.id}`}>
           <CardMedia
             sx={{ height: 300 }}
             image={props.product.imageUrl}
