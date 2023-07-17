@@ -7,7 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Height } from "@mui/icons-material";
+import { useParams } from "react-router-dom";
 
 interface Props {
   product: ProductI;
@@ -30,19 +30,22 @@ function Product(props: Props) {
           justifyContent: "space-between",
           flexDirection: "column",
         }}>
-        <CardMedia
-          sx={{ height: 300 }}
-          image={props.product.imageUrl}
-          title={props.product.name}
-        />
-        <CardContent>
-          <Typography variant="h5" component="div" align="center">
-            {props.product.name}
-          </Typography>
-          {/* <Typography variant="body2" color="text.secondary" align="center">
+        <a href={`/#/products/${props.product.id}`}>
+          <CardMedia
+            sx={{ height: 300 }}
+            image={props.product.imageUrl}
+            title={props.product.name}
+          />
+          <CardContent>
+            <Typography variant="h5" component="div" align="center">
+              {props.product.name}
+            </Typography>
+            {/* <Typography variant="body2" color="text.secondary" align="center">
             {props.product.description}
           </Typography> */}
-        </CardContent>
+          </CardContent>
+        </a>
+
         <CardActions sx={{ display: "flex", justifyContent: "center" }}>
           <Button variant="contained" size="small">
             Add to cart

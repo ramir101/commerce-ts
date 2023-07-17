@@ -13,6 +13,7 @@ import { Container } from "@mui/material";
 import Nav from "./Nav";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Products from "./Products";
+import ProductDetailsPage from "./ProductDetailsPage";
 
 function App() {
   const auth = useSelector<RootState, boolean>((state) => state.auth);
@@ -48,6 +49,10 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/products/:category" element={<Products />} />
+        <Route
+          path="/products/:category/:id"
+          element={<ProductDetailsPage />}
+        />
       </Routes>
     </Container>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ProductI, RootState } from "../store";
-import { Box, Grid, Tab, Tabs, Typography } from "@mui/material";
+import { Grid, Tab, Tabs, Typography } from "@mui/material";
 import Product from "./Product";
 import { useParams } from "react-router-dom";
 
