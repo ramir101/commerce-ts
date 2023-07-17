@@ -11,7 +11,9 @@ import {
   CardActions,
   Typography,
   Container,
+  Grid,
 } from "@mui/material";
+import Product from "./Product";
 
 function ProductDetailsPage() {
   const products = useSelector<RootState>(
@@ -20,11 +22,15 @@ function ProductDetailsPage() {
   const { id } = useParams();
 
   const specificProduct = products.find((product) => product.id === id)!;
-  const filteredProducts = products.filter(
+  let relatedProducts = products.filter(
     (product) =>
       product.petType === specificProduct.petType &&
       product.id !== specificProduct.id
   );
+
+  if (relatedProducts.length > 4) {
+    relatedProducts = relatedProducts.slice(0, 4);
+  }
 
   return (
     <Container maxWidth={false} disableGutters>
@@ -37,8 +43,8 @@ function ProductDetailsPage() {
           maxWidth: "100%",
         }}>
         <CardHeader
+          titleTypographyProps={{ variant: "h3" }}
           title={specificProduct.name}
-          subheader={`For ${specificProduct.petType}s`}
         />
         <CardMedia
           sx={{ maxWidth: "50%", height: 450 }}
@@ -57,6 +63,14 @@ function ProductDetailsPage() {
           </Button>
         </CardActions>
       </Card>
+      <Typography variant="h3" align="center">
+        Related Products
+      </Typography>
+      <Grid container spacing={2}>
+        {relatedProducts.map((product) => (
+          <Product key={product.id} product={product} />
+        ))}
+      </Grid>
     </Container>
   );
 }
