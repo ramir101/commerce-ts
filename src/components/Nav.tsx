@@ -15,11 +15,13 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useDispatch } from "react-redux";
 import { RootState, UserI, logout } from "../store";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const pages = ["Products", "Pricing", "Blog"];
 
 function Nav() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const user = useSelector<RootState, UserI>((state) => state.user);
 
@@ -49,14 +51,14 @@ function Nav() {
 
   return (
     <AppBar position="static" sx={{ margin: 0 }}>
-      <Container maxWidth="xl">
+      <Container maxWidth={false}>
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/#/products/all"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -96,11 +98,13 @@ function Nav() {
               sx={{
                 display: { xs: "block", md: "none" },
               }}>
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography
+                  textAlign="center"
+                  onClick={() => navigate("/products/all")}>
+                  Products
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -122,14 +126,21 @@ function Nav() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}>
-                {page}
-              </Button>
-            ))}
+            <Button
+              onClick={() => navigate("/products/all")}
+              sx={{ my: 2, color: "white", display: "block" }}>
+              All-Products
+            </Button>
+            <Button
+              onClick={() => navigate("/products/cats")}
+              sx={{ my: 2, color: "white", display: "block" }}>
+              Cat-Products
+            </Button>
+            <Button
+              onClick={() => navigate("/products/dogs")}
+              sx={{ my: 2, color: "white", display: "block" }}>
+              Dog-Products
+            </Button>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

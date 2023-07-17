@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 import { UserI } from "./user";
 
 interface ActionAuthI {
-  type: string;
+  type: "SET_AUTH" | "REMOVE_AUTH";
   auth: boolean;
 }
 
@@ -23,7 +23,7 @@ export const logout = () => {
 };
 
 export const loginWithToken = () => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch<ActionAuthI>) => {
     const token = window.localStorage.getItem("token");
 
     if (token) {

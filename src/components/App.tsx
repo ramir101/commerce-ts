@@ -1,15 +1,25 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState, fetchUser, loginWithToken } from "../store";
+import {
+  ActionProducti,
+  RootState,
+  fetchProducts,
+  fetchUser,
+  loginWithToken,
+} from "../store";
 import { useDispatch } from "react-redux";
 import Login from "./Login";
 import { Container } from "@mui/material";
-import Header from "./Nav";
 import Nav from "./Nav";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import Products from "./Products";
+import ProductDetailsPage from "./ProductDetailsPage";
 
 function App() {
   const auth = useSelector<RootState, boolean>((state) => state.auth);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch<any>(loginWithToken());
@@ -18,6 +28,7 @@ function App() {
   useEffect(() => {
     if (auth === true) {
       dispatch<any>(fetchUser());
+      dispatch<any>(fetchProducts());
     }
   }, [auth]);
 
@@ -29,13 +40,21 @@ function App() {
     );
   }
 
+  if (pathname === "/") {
+    navigate("/products/all");
+  }
+
   return (
-    <div>
-      <nav>
-        <Nav />
-      </nav>
-      <div style={{ height: "60px" }}></div>
-    </div>
+    <Container maxWidth={false} disableGutters>
+      <Nav />
+      <Routes>
+        <Route path="/products/:category" element={<Products />} />
+        <Route
+          path="/products/:category/:id"
+          element={<ProductDetailsPage />}
+        />
+      </Routes>
+    </Container>
   );
 }
 

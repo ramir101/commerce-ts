@@ -13,12 +13,12 @@ export type UserI = {
 };
 
 interface ActionUserI {
-  type: string;
+  type: "SET_USER" | "UPDATE_USER";
   user: UserI;
 }
 
 export const fetchUser = () => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch<ActionUserI>) => {
     const token = window.localStorage.getItem("token");
     const response = await axios.get("/api/user", {
       headers: {
