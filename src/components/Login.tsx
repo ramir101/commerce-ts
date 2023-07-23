@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { attemptLogin } from "../store";
-import { Box } from "@mui/material";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -25,27 +25,44 @@ function Login() {
   };
 
   return (
-    <Box>
-      <div id="login">
+    <Container>
+      <Typography variant="h3" align="center" mt={7} gutterBottom>
+        {" "}
+        Commerce Project Login{" "}
+      </Typography>
+      <Box id="login" sx={{ display: "flex", justifyContent: "center" }}>
         <form onSubmit={login}>
-          <h2>Login</h2>
-          <label>Username</label>
-          <input
+          <TextField
+            sx={{ margin: "auto", width: "50%" }}
+            label="Username"
             value={credentials.username}
             name="username"
             onChange={onChange}
+            variant="filled"
+            fullWidth
           />
-          <label>Password</label>
-          <input
-            name="password"
+          <TextField
+            sx={{ margin: "auto", width: "50%" }}
+            label="Password"
             value={credentials.password}
+            name="password"
             onChange={onChange}
+            variant="filled"
             type="password"
+            fullWidth
           />
-          <button>Sign In</button>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ margin: "auto", width: "50%" }}>
+            Login
+          </Button>
+          <Button variant="contained" sx={{ margin: "auto", width: "50%" }}>
+            Register
+          </Button>
         </form>
-      </div>
-    </Box>
+      </Box>
+    </Container>
   );
 }
 
