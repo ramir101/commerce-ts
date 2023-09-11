@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { unitedStates } from "../../server/db/syncNseed/unitedStates";
-import { Box, Button, InputLabel, MenuItem, TextField } from "@mui/material";
+import { Box, Button, MenuItem, TextField } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { UserI } from "../store";
+import axios from "axios";
 
-function Register() {
+interface Props {
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Register(props: Props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
@@ -26,19 +32,21 @@ function Register() {
     setCredentials({ ...credentials, [ev.target.name]: ev.target.value });
   };
 
-  //   const login = (ev: React.FormEvent) => {
-  //     ev.preventDefault();
-  //     credentials.username && credentials.password && confirmPassword
-  //       ? users.filter((user) => user.username === credentials.username).length
-  //         ? alert("username taken")
-  //         : credentials.password === confirmPassword
-  //         ? dispatch(createUser(credentials), navigate("/"))
-  //         : alert("password must match")
-  //       : alert("all fields required");
-  //   };
+  const userRegister = (ev: React.FormEvent) => {
+    ev.preventDefault();
+    const createUser = async (user: UserI) => {
+      try {
+        const response = await axios.post("/api/user", user);
+        props.setToggle(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    createUser(credentials as UserI);
+  };
 
   return (
-    <form>
+    <form onSubmit={userRegister}>
       <Box
         id="createUser"
         sx={{
@@ -106,7 +114,9 @@ function Register() {
           name="state"
           onChange={onChange}>
           {unitedStates.map((state) => (
-            <MenuItem value={state}>{state}</MenuItem>
+            <MenuItem value={state} key={state}>
+              {state}
+            </MenuItem>
           ))}
         </Select>
         <TextField

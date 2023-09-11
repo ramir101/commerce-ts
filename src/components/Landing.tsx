@@ -16,7 +16,11 @@ function Landing() {
           <Button onClick={() => setToggle(false)}> back to Login page</Button>
         </Box>
       )}
-      {!toggle ? <Login setToggle={setToggle} toggle={toggle} /> : <Register />}
+      {!toggle ? (
+        <Login setToggle={setToggle} toggle={toggle} />
+      ) : (
+        <Register setToggle={setToggle} />
+      )}
     </Container>
   );
 }
