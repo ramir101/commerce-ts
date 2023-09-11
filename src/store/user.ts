@@ -13,7 +13,7 @@ export type UserI = {
 };
 
 interface ActionUserI {
-  type: "SET_USER" | "UPDATE_USER";
+  type: "SET_USER" | "UPDATE_USER" | "CREATE_USER";
   user: UserI;
 }
 
@@ -27,6 +27,10 @@ export const fetchUser = () => {
     });
     dispatch({ type: "SET_USER", user: response.data });
   };
+};
+
+export const createUser = async (user: UserI) => {
+  const response = await axios.post("/api/user", user);
 };
 
 const user = (

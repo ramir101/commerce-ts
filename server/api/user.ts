@@ -15,4 +15,14 @@ app.get("/", async (req, res, next) => {
   }
 });
 
+app.post("/", async (req, res, next) => {
+  try {
+    const response = await prisma.user.signUp(req.body);
+
+    res.send(response);
+  } catch (ex) {
+    next(ex);
+  }
+});
+
 export = app;

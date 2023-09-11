@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { attemptLogin } from "../store";
-import { Box } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+interface Props {
+  toggle: boolean;
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Login(props: Props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { setToggle } = props;
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -25,26 +33,40 @@ function Login() {
   };
 
   return (
-    <Box>
-      <div id="login">
-        <form onSubmit={login}>
-          <h2>Login</h2>
-          <label>Username</label>
-          <input
-            value={credentials.username}
-            name="username"
-            onChange={onChange}
-          />
-          <label>Password</label>
-          <input
-            name="password"
-            value={credentials.password}
-            onChange={onChange}
-            type="password"
-          />
-          <button>Sign In</button>
-        </form>
-      </div>
+    <Box id="login" sx={{ display: "flex", justifyContent: "center" }}>
+      <form onSubmit={login}>
+        <TextField
+          sx={{ margin: "auto", width: "50%" }}
+          label="Username"
+          value={credentials.username}
+          name="username"
+          onChange={onChange}
+          variant="filled"
+          fullWidth
+        />
+        <TextField
+          sx={{ margin: "auto", width: "50%" }}
+          label="Password"
+          value={credentials.password}
+          name="password"
+          onChange={onChange}
+          variant="filled"
+          type="password"
+          fullWidth
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ margin: "auto", width: "50%" }}>
+          Login
+        </Button>
+        <Button
+          variant="contained"
+          onClick={() => setToggle(true)}
+          sx={{ margin: "auto", width: "50%" }}>
+          Create account
+        </Button>
+      </form>
     </Box>
   );
 }
